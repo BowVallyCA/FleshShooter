@@ -84,6 +84,12 @@ public class PlayerController : MonoBehaviour
             cooldownTimer -= Time.deltaTime;
         }
 
+        // ?? New: Check for left mouse click while holding
+        if (heldObject != null && Input.GetMouseButtonDown(0))
+        {
+            //TriggerHeldObjectEvent();
+        }
+
         // Keep the held object in place
         if (heldObject != null)
         {
