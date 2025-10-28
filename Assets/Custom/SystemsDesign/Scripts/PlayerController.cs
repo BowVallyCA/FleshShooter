@@ -132,12 +132,12 @@ public class PlayerController : MonoBehaviour
 
     void SpawnAndDespawn()
     {
-        if (heldObject == null & cooldownTimer <= 0f)
+        if (heldObject == null & cooldownTimer <= 0f & currentHealth > 0)
         {
             // Spawn the prefab and store a reference to it
             Instantiate(fleshCubePrefab, holdPoint.transform.position, holdPoint.transform.localRotation);
             TakeDamage(10);
-            cooldownTimer += 3f;
+            cooldownTimer += 1f;
         }
         else
         {
