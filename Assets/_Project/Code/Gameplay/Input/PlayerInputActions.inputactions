@@ -235,11 +235,11 @@
                 },
                 {
                     "name": "",
-                    "id": "e74b5680-b4dc-4e10-b132-bbce994c57bd",
-                    "path": "<Mouse>/rightButton",
+                    "id": "5ad6b111-58e6-4b1f-b4c9-65d6c817cb34",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Keyboard&Mouse",
+                    "groups": "",
                     "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -284,6 +284,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
+                    "action": "Dodge",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5cf7aa91-52a1-4811-8f8c-239a34172c9b",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "Dodge",
                     "isComposite": false,
                     "isPartOfComposite": false

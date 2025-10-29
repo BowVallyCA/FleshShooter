@@ -1,14 +1,15 @@
 using UnityEngine;
 using UnityEngine.Events;
 using System; // Needed for Action
-
+using _Project.Code.Gameplay.Input;
+using _Project.Code.Core.Events;
 public class PlayerController : MonoBehaviour
 {
     //Made with some help from Chat GPT
 
     [SerializeField] private GameObject fleshCubePrefab;
 
-    public static event Action<int> OnHealthChanged; // Event that others can subscribe to
+    public event Action<int> OnHealthChanged; // Event that others can subscribe to
 
     [Header("Pickup Settings")]
     public string pickableTag = "Pickable";  // Tag of objects that can be picked up
@@ -38,56 +39,66 @@ public class PlayerController : MonoBehaviour
 
         currentHealth = maxHealth;
         OnHealthChanged?.Invoke(currentHealth); // Notify listeners of initial health
+        EventBus.Instance.Subscribe<DodgeInputEvent>(this, HandleThrow);
+        EventBus.Instance.Subscribe<AttackInputEvent>(this, HandleFire);
+        EventBus.Instance.Subscribe<InteractInputEvent>(this, HandleSpawn);
+
+    }
+    void HandleThrow(DodgeInputEvent dodgeInput)
+    {
+        if (heldObject == null)
+        {
+            TryPickup();
+        }
+        else
+        {
+            ThrowObject();
+        }
+    }
+
+    void HandleFire(AttackInputEvent attackInput)
+    {
+        if (heldObject != null)
+        {
+            FleshCube gun = heldObject.GetComponent<FleshCube>();
+            if (gun != null)
+            {
+                gun.Shoot();
+            }
+            else
+            {
+                Debug.Log("Held object is not a gun.");
+            }
+        }
+        else
+        {
+            Debug.Log("Not holding anything to shoot.");
+        }
+    }
+
+    void HandleSpawn(InteractInputEvent attackInput)
+    {
+        if (heldObject == null & cooldownTimer <= 0f & currentHealth > 0)
+        {
+            // Spawn the prefab and store a reference to it
+            Instantiate(fleshCubePrefab, holdPoint.transform.position, holdPoint.transform.localRotation);
+            TakeDamage(10);
+            cooldownTimer += 1f;
+        }
+        else
+        {
+            // Destroy the currently held object and clear the reference
+            Destroy(heldObject.gameObject);
+            GainHealth(10);
+            heldObject = null;
+        }
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(1)) // Right Mouse Button
-        {
-            if (heldObject == null)
-            {
-                TryPickup();
-            }
-            else
-            {
-                ThrowObject();
-            }
-        }
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (heldObject != null)
-            {
-                FleshCube gun = heldObject.GetComponent<FleshCube>();
-                if (gun != null)
-                {
-                    gun.Shoot();
-                }
-                else
-                {
-                    Debug.Log("Held object is not a gun.");
-                }
-            }
-            else
-            {
-                Debug.Log("Not holding anything to shoot.");
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            SpawnAndDespawn();
-        }
-
         if (cooldownTimer > 0)
         {
             cooldownTimer -= Time.deltaTime;
-        }
-
-        // ?? New: Check for left mouse click while holding
-        if (heldObject != null && Input.GetMouseButtonDown(0))
-        {
-            //TriggerHeldObjectEvent();
         }
 
         // Keep the held object in place
@@ -128,24 +139,6 @@ public class PlayerController : MonoBehaviour
         heldObject.transform.parent = null;
         heldObject.linearVelocity = playerCamera.transform.forward * throwForce;
         heldObject = null;
-    }
-
-    void SpawnAndDespawn()
-    {
-        if (heldObject == null & cooldownTimer <= 0f & currentHealth > 0)
-        {
-            // Spawn the prefab and store a reference to it
-            Instantiate(fleshCubePrefab, holdPoint.transform.position, holdPoint.transform.localRotation);
-            TakeDamage(10);
-            cooldownTimer += 1f;
-        }
-        else
-        {
-            // Destroy the currently held object and clear the reference
-            Destroy(heldObject.gameObject);
-            GainHealth(10);
-            heldObject = null;
-        }
     }
 
     public void TakeDamage(int amount)

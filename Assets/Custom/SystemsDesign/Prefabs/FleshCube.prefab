@@ -185,8 +185,11 @@ MonoBehaviour:
   firePoint: {fileID: 2863444306298988044}
   bulletSpeed: 20
   bulletLifetime: 5
+  maxAmmo: 6
+  currentAmmo: 0
+  minScale: {x: 0.2, y: 0.2, z: 0.2}
   explosionRadius: 5
-  explosionForce: 100
+  explosionForce: 25
   targetTag: FleshCube
   explosionEffect: {fileID: 0}
   showDebugGizmo: 0
