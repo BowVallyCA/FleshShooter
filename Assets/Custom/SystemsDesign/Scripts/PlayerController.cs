@@ -3,13 +3,14 @@ using UnityEngine.Events;
 using System; // Needed for Action
 using _Project.Code.Gameplay.Input;
 using _Project.Code.Core.Events;
+using Unity.Cinemachine;
 public class PlayerController : MonoBehaviour
 {
     //Made with some help from Chat GPT
 
     [SerializeField] private GameObject fleshCubePrefab;
 
-    public event Action<int> OnHealthChanged; // Event that others can subscribe to
+    public static event Action<int> OnHealthChanged; // Event that others can subscribe to
 
     [Header("Pickup Settings")]
     public string pickableTag = "Pickable";  // Tag of objects that can be picked up
@@ -28,6 +29,9 @@ public class PlayerController : MonoBehaviour
 
     private FleshCube fleshCubeScript;
     private float cooldownTimer = 0f;
+    public AudioSource audioSource;
+    public CinemachineCamera cineCamera;
+    public CinemachineBasicMultiChannelPerlin noisePerlin;
 
     void Start()
     {
@@ -44,6 +48,7 @@ public class PlayerController : MonoBehaviour
         EventBus.Instance.Subscribe<InteractInputEvent>(this, HandleSpawn);
 
     }
+
     void HandleThrow(DodgeInputEvent dodgeInput)
     {
         if (heldObject == null)
@@ -78,16 +83,19 @@ public class PlayerController : MonoBehaviour
 
     void HandleSpawn(InteractInputEvent attackInput)
     {
-        if (heldObject == null & cooldownTimer <= 0f & currentHealth > 0)
+        if (heldObject == null && cooldownTimer <= 0f && currentHealth > 0)
         {
-            // Spawn the prefab and store a reference to it
             Instantiate(fleshCubePrefab, holdPoint.transform.position, holdPoint.transform.localRotation);
             TakeDamage(10);
-            cooldownTimer += 1f;
+            cooldownTimer = 1f;
+
+            audioSource.Play();
+
+            // Camera shake
+            CameraShakeManager.Shake();
         }
-        else
+        else if (heldObject != null)
         {
-            // Destroy the currently held object and clear the reference
             Destroy(heldObject.gameObject);
             GainHealth(10);
             heldObject = null;

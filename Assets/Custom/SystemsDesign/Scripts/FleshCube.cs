@@ -4,6 +4,7 @@ using _Project.Code.Core.Events;
 using UnityEngine;
 using _Project.Code.Core.ServiceLocator;
 
+
 public class FleshCube : MonoBehaviour
 {
     [Header("Projectile Settings")]
@@ -29,6 +30,7 @@ public class FleshCube : MonoBehaviour
     [Header("Debug")]
     public bool showDebugGizmo = true;
 
+    [SerializeField] private AudioSource audioSource;
     void Start()
     {
         currentAmmo = maxAmmo;
@@ -59,6 +61,8 @@ public class FleshCube : MonoBehaviour
         {
             Debug.Log("Collided with another cube");
 
+            CameraShakeManager.Shake();
+
             Explode();
         }
         else
@@ -76,6 +80,8 @@ public class FleshCube : MonoBehaviour
             Instantiate(explosionEffect, transform.position, Quaternion.identity);
         }
 
+
+
         // Detect all colliders in a sphere around the explosion
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, explosionRadius);
 
@@ -87,16 +93,6 @@ public class FleshCube : MonoBehaviour
             if (rb != null)
             {
                 rb.AddExplosionForce(explosionForce, transform.position, explosionRadius, 1f, ForceMode.Impulse);
-            }
-
-            // Check for specific tag
-            if (hit.CompareTag(targetTag))
-            {
-                Debug.Log($"Explosion hit object with tag '{targetTag}': {hit.name}");
-            }
-            else
-            {
-                Debug.Log("Did not hit target tag");
             }
         }
 
@@ -139,6 +135,8 @@ public class FleshCube : MonoBehaviour
         {
             rb.linearVelocity = firePoint.forward * bulletSpeed;
         }
+
+        audioSource.Play();  
 
         // Destroy after lifetime
         Destroy(bullet, bulletLifetime);
