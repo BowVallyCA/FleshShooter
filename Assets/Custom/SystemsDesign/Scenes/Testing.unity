@@ -587,6 +587,7 @@ RectTransform:
   - {fileID: 286146333}
   - {fileID: 1002616972}
   - {fileID: 450990759}
+  - {fileID: 1909726880}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -610,6 +611,11 @@ MonoBehaviour:
   nearDeathText: {fileID: 1002616973}
   countdownText: {fileID: 2093707754}
   loseScreen: {fileID: 450990760}
+  bloodOverlay: {fileID: 1909726881}
+  maxBloodAlpha: 0.85
+  bloodLerpSpeed: 6
+  useNonLinearResponse: 1
+  nonLinearExponent: 2
 --- !u!1001 &502284049
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1829,6 +1835,81 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6da9f0a9a6a53c24f92c0d4b945cb52a, type: 3}
+--- !u!1 &1909726879
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1909726880}
+  - component: {fileID: 1909726882}
+  - component: {fileID: 1909726881}
+  m_Layer: 5
+  m_Name: ScreenBlood
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1909726880
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1909726879}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 476462121}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1909726881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1909726879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 5bee0d680c928254186c78f586cf9fb3, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1909726882
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1909726879}
+  m_CullTransparentMesh: 1
 --- !u!1 &1940649467
 GameObject:
   m_ObjectHideFlags: 0
@@ -2048,29 +2129,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3034503133875101262, guid: 8a759df0a74758e428d73d9658e8a506, type: 3}
-      propertyPath: cineCamera
-      value: 
-      objectReference: {fileID: 1031668865}
-    - target: {fileID: 3034503133875101262, guid: 8a759df0a74758e428d73d9658e8a506, type: 3}
-      propertyPath: audioSource
-      value: 
-      objectReference: {fileID: 9135897477980601091}
-    - target: {fileID: 3034503133875101262, guid: 8a759df0a74758e428d73d9658e8a506, type: 3}
-      propertyPath: noisePerlin
-      value: 
-      objectReference: {fileID: 1031668867}
-    - target: {fileID: 3034503133875101262, guid: 8a759df0a74758e428d73d9658e8a506, type: 3}
-      propertyPath: shakeDuration
-      value: 0.25
+    - target: {fileID: 3628947397788478182, guid: 8a759df0a74758e428d73d9658e8a506, type: 3}
+      propertyPath: holdOffset.x
+      value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3034503133875101262, guid: 8a759df0a74758e428d73d9658e8a506, type: 3}
-      propertyPath: shakeAmplitude
-      value: 4
+    - target: {fileID: 3628947397788478182, guid: 8a759df0a74758e428d73d9658e8a506, type: 3}
+      propertyPath: holdOffset.y
+      value: -0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3034503133875101262, guid: 8a759df0a74758e428d73d9658e8a506, type: 3}
-      propertyPath: shakeFrequency
-      value: 4
+    - target: {fileID: 3628947397788478182, guid: 8a759df0a74758e428d73d9658e8a506, type: 3}
+      propertyPath: holdOffset.z
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5675074895673688394, guid: 8a759df0a74758e428d73d9658e8a506, type: 3}
       propertyPath: m_Name
@@ -2178,11 +2247,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1309e81558e2e8f4698b735e8ec25e80, type: 3}
---- !u!82 &9135897477980601091 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 7923314494458330996, guid: 8a759df0a74758e428d73d9658e8a506, type: 3}
-  m_PrefabInstance: {fileID: 3120675813361554058}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

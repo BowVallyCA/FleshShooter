@@ -59,15 +59,9 @@ public class FleshCube : MonoBehaviour
     {
         if(collision.gameObject.tag == "FleshCube")
         {
-            Debug.Log("Collided with another cube");
-
             CameraShakeManager.Shake();
 
             Explode();
-        }
-        else
-        {
-            Debug.Log("Not another cube");
         }
     }
 

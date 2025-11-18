@@ -268,17 +268,6 @@
                 },
                 {
                     "name": "",
-                    "id": "b6c7d8e9-f0a1-4b2c-3d4e-5f6a7b8c9d0e",
-                    "path": "<Keyboard>/leftCtrl",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Dodge",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "c7d8e9f0-a1b2-4c3d-4e5f-6a7b8c9d0e1f",
                     "path": "<Gamepad>/buttonEast",
                     "interactions": "",

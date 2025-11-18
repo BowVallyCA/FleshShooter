@@ -44,8 +44,11 @@ GameObject:
   - component: {fileID: 3260409599806308293}
   - component: {fileID: 5503264342981369574}
   - component: {fileID: 8896943995836258192}
-  - component: {fileID: 3034503133875101262}
   - component: {fileID: 7923314494458330996}
+  - component: {fileID: 8857824793741429987}
+  - component: {fileID: 3628947397788478182}
+  - component: {fileID: 8771428737519958070}
+  - component: {fileID: 7957575375373463061}
   m_Layer: 3
   m_Name: CustomFPSPlayer
   m_TagString: Untagged
@@ -139,28 +142,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <MovementProfile>k__BackingField: {fileID: 11400000, guid: df501f85e39040c4b8292a4d16a0ae0a, type: 2}
---- !u!114 &3034503133875101262
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5675074895673688394}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50ebe20f5faa6e240a6db020ca97407f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fleshCubePrefab: {fileID: 3326070066375413175, guid: 1309e81558e2e8f4698b735e8ec25e80, type: 3}
-  pickableTag: FleshCube
-  pickupRange: 3
-  holdPoint: {fileID: 930280998916638394}
-  throwForce: 10
-  onHeldObjectLeftClick:
-    m_PersistentCalls:
-      m_Calls: []
-  maxHealth: 100
-  currentHealth: 0
 --- !u!82 &7923314494458330996
 AudioSource:
   m_ObjectHideFlags: 0
@@ -258,6 +239,63 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8857824793741429987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5675074895673688394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89001a551b406e542bd801b667d2ed17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  currentHealth: 0
+--- !u!114 &3628947397788478182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5675074895673688394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3263c0cdd9a661f4fba34ccc29853568, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickableTag: FleshCube
+  pickupRange: 3
+  holdPoint: {fileID: 930280998916638394}
+  throwForce: 10
+--- !u!114 &8771428737519958070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5675074895673688394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7dda66d98f1aa24c8fa4e993aae6212, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7957575375373463061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5675074895673688394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c208f22250d9b5442b443fcc52fc1961, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fleshCubePrefab: {fileID: 3326070066375413175, guid: 1309e81558e2e8f4698b735e8ec25e80, type: 3}
+  audioSource: {fileID: 7923314494458330996}
+  spawnCooldown: 1
 --- !u!1 &5977161666297634275
 GameObject:
   m_ObjectHideFlags: 0
